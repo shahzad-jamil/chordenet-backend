@@ -9,7 +9,6 @@ export const storageData = (name: string) => {
         fs.mkdirSync(path, { recursive: true });
         cb(null, path);
       } catch (err: any) {
-        // Handle directory creation error
         cb(err.message, null);
       }
     },

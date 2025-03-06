@@ -6,7 +6,6 @@ import { response } from "../../response";
 import { createResetToken } from "../jwt";
 
 export const sendRegistrationEmail = async (
-  username: string,
   email: string,
   res: Response
 ): Promise<void> => {
@@ -15,7 +14,7 @@ export const sendRegistrationEmail = async (
   const mailOptions: nodemailer.SendMailOptions = {
     from: process.env.VERIFICATION_EMAIL as string,
     to: email,
-    subject: "Welcome to Pacoon",
+    subject: "Welcome to Chordenet",
     html: `<html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -65,20 +64,20 @@ export const sendRegistrationEmail = async (
 <body>
     <div class="container">
         <div class="header">
-            Welcome to Pacoon!
+            Welcome to !
         </div>
         <div class="content">
-            <p>Hi ${username},</p>
-            <p>Thank you for registering with Pacoon! We're excited to have you onboard.</p>
+            <p>Hi ${email},</p>
+            <p>Thank you for registering with Chordenet! We're excited to have you onboard.</p>
             <p>To complete your registration, please click the button below to verify your email address:</p>
             <p style="text-align: center;">
                 <a href="${VERIFY_EMAIL}?token=${token}" class="button">Verify Your Email</a>
             </p>
-            <p>If you did not register with Pacoon, please ignore this email.</p>
+            <p>If you did not register with Chordenet, please ignore this email.</p>
         </div>
         <div class="footer">
             <p>Best regards,</p>
-            <p>Pacoon Team</p>
+            <p>Chordenet Team</p>
         </div>
     </div>
 </body>
