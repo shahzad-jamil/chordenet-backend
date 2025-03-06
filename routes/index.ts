@@ -4,7 +4,6 @@ import  AuthRoutes from "./authRoutes"
 const router=Router()
 
 
-router.use("/auth",AuthRoutes)
-// router.use("/user",AuthRoutes)
+router.use("/user",AuthRoutes)
 
 export default router

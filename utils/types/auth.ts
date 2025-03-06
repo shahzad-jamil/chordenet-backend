@@ -1,12 +1,12 @@
 export type User = {
   id: number;
-  username: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
   role: string;
   isVerified: boolean;
   isActive: boolean;
-  hasSubscription: boolean;
 };
 
 export type UserData = {
