@@ -5,10 +5,7 @@ import { Response } from "express";
 import { response } from "../../response";
 import { createResetToken } from "../jwt";
 
-export const sendRegistrationEmail = async (
-  email: string,
-  res: Response
-): Promise<void> => {
+export const sendRegistrationEmail = async (email: string, res: Response): Promise<Response> => { // ✅ Fix: Change return type
   const token = createResetToken({ email }, "10m");
 
   const mailOptions: nodemailer.SendMailOptions = {
@@ -21,51 +18,17 @@ export const sendRegistrationEmail = async (
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Verification</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            color: #333;
-        }
-        .container {
-            width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-        }
-        .header {
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-            color: #5e9b6d;
-        }
-        .content {
-            margin: 20px 0;
-        }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #5e9b6d;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 16px;
-            text-align: center;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 14px;
-            color: #777;
-        }
+        body { font-family: Arial, sans-serif; color: #333; }
+        .container { width: 100%; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 8px; }
+        .header { font-size: 24px; font-weight: bold; text-align: center; color: #5e9b6d; }
+        .content { margin: 20px 0; }
+        .button { display: inline-block; padding: 10px 20px; background-color: #5e9b6d; color: #ffffff; text-decoration: none; border-radius: 4px; font-size: 16px; text-align: center; }
+        .footer { text-align: center; margin-top: 30px; font-size: 14px; color: #777; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            Welcome to !
-        </div>
+        <div class="header">Welcome to Chordenet!</div>
         <div class="content">
             <p>Hi ${email},</p>
             <p>Thank you for registering with Chordenet! We're excited to have you onboard.</p>
@@ -81,23 +44,20 @@ export const sendRegistrationEmail = async (
         </div>
     </div>
 </body>
-</html>
-`,
+</html>`
   };
 
   try {
     await transporter.sendMail(mailOptions);
     console.log("Registration email sent successfully!");
-
-    response(
-      res,
-      201,
-      "Register email sent successfully. Please check your registration email"
-    );
+    return response(res, 201, "Register email sent successfully. Please check your email.");
+    
   } catch (error) {
     console.error("Error sending registration email:", error);
-    res.status(500).json({
-      message: "An error occurred while sending the registration email.",
-    });
+    if (!res.headersSent) {
+      return res.status(500).json({ message: "An error occurred while sending the registration email." });
+    }
+
+    return res;
   }
 };
