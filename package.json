@@ -30,6 +30,7 @@
     "nodemailer": "^6.9.16",
     "paypal-rest-sdk": "^1.8.1",
     "pg": "^8.13.1",
+    "stripe": "^17.7.0",
     "zod": "^3.24.1"
   },
   "keywords": [],
@@ -45,6 +46,7 @@
     "@types/node": "^20.17.12",
     "@types/nodemailer": "^6.4.17",
     "@types/pg": "^8.11.10",
+    "@types/stripe": "^8.0.416",
     "knex": "^3.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2",
