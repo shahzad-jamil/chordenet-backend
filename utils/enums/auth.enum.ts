@@ -6,5 +6,6 @@ export enum AUTH{
     FORGOT_PASSWORD="/forget-password",
     UPDATE_PROFILE="/update-profile",
     VERIFY_EMAIL="/verify-user",
-    CHECKTOKEN="/check-token"
+    CHECKTOKEN="/check-token",
+    CHANGE_TOKEN="/update-token"
 }

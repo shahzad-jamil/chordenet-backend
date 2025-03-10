@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, response, Response } from "express";
 import asyncHandler from "../../middlewares/trycatch";
 import db from "../../config/db";
 import validate from "../../validations";
@@ -250,6 +250,7 @@ export const checkToken= asyncHandler(async(req:any,res:Response)=>{
             .where({ token, token_type })
             .orderBy("created_at", "desc") 
             .first();
+            console.log(tokenRecord);
             if (!tokenRecord) {
                 return sendReponse(res, 401, "Invalid or expired token", false);
             }
@@ -265,6 +266,30 @@ export const checkToken= asyncHandler(async(req:any,res:Response)=>{
 
         }
         return sendReponse(res, 200, "Token not found", false);
+    }
+    catch(err)
+    {
+        return sendReponse(res,500,"Internal Server Error",false,err)
+    }
+})
+export const updateToken=asyncHandler(async(req:any,res:Response)=>{
+    try{
+        const {token}=req.body;
+        if(token)
+        {
+            const tokenRecord = await db("tokens")
+            .where({ token })
+            .orderBy("created_at", "desc") 
+            .first();
+            if (!tokenRecord) {
+                return sendReponse(res, 401, "Invalid or expired token", false);
+            }
+            await db("tokens")
+            .where({ token })
+            .update({ is_used: true });
+            return sendReponse(res, 200, "Token updated successfully", true);
+        }
+        return sendReponse(res, 404, "Token not found", false);
     }
     catch(err)
     {
