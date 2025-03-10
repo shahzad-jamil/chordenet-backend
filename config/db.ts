@@ -1,30 +1,7 @@
-import pg from "pg";
-// import { config } from "dotenv";
-
-// config();
-
-// const { Pool } = pg;
-
-// const PORT = parseInt(process.env.DB_PORT || "5432", 10);
-
-// const DATABASE_URL = `postgres://${process.env.DB_USER}:${process.env.DB_PASSWORD_ENCRYPTED}@${process.env.DB_HOST}:${PORT}/${process.env.DB_NAME}`;
-// const db = new Pool({
-//   connectionString: DATABASE_URL,
-// });
-
-// db.on("connect", () => {
-//   console.log("Database connected successfully!");
-// });
-
-// db.on("error", (err) => {
-//   console.error("Database connection error:", err.stack);
-// });
-
-// export default db;
 import knex from "knex";
 import { config } from "dotenv";
 
-config();
+config(); 
 
 const PORT = parseInt(process.env.DB_PORT || "5432", 10);
 
@@ -37,6 +14,20 @@ const db = knex({
     database: process.env.DB_NAME,
     port: PORT,
   },
+  pool: { min: 2, max: 10 }, 
 });
+
+const checkDatabaseConnection = async () => {
+  try {
+    await db.raw("SELECT 1+1 AS result"); 
+    console.log(`Database connected successfully on port ${PORT}`);
+  } catch (error) {
+    console.error("Database connection failed:", error);
+    process.exit(1); 
+  }
+};
+
+// Run the connection check when the project starts
+checkDatabaseConnection();
 
 export default db;

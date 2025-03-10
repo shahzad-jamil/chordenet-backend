@@ -1,3 +1,5 @@
 export enum STRIPE{
-CREATEPLAN='/createplan'
+CREATEPLAN='/createplan',
+UPDATEPLAN='/updateplan/:id',
+DELETEPLAN='/deleteplan/:id'
 }
