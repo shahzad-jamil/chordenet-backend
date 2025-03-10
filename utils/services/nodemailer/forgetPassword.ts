@@ -5,15 +5,16 @@ import type { Response } from "express";
 import transporter from ".";
 import { response } from "../../response";
 import { createResetToken, getSignedJwt } from "../jwt";
+import db from "../../../config/db";
 config();
 
 // Function to send password reset email
 export const sendPasswordResetEmail = async (
   email: string,
   id: string,
-  res: Response
+  res: Response,
+  token:any
 ): Promise<void> => {
-  const token = getSignedJwt(id);
 
 
   const mailOptions: nodemailer.SendMailOptions = {

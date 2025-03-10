@@ -9,6 +9,7 @@ router.post(AUTH.LOGIN_USER,AuthController.loginUser);
 router.post(AUTH.CHANGE_PASSWORD,authMiddleware,AuthController.changePassword);
 router.post(AUTH.UPDATE_PASSWORD,authMiddleware,AuthController.updatePassword);
 router.post(AUTH.FORGOT_PASSWORD,AuthController.forgetPassword);
+router.post(AUTH.CHECKTOKEN,AuthController.checkToken);
 router.post(AUTH.VERIFY_EMAIL,AuthController.verifyEmail)
 
 

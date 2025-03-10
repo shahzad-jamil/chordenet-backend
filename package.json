@@ -7,7 +7,7 @@
     "start": "ts-node index.ts",
     "build": "tsc",
     "tunnel": "lt --port 8000 --subdomain pacoon",
-    "knex": "knex --knexfile knex/knexfile.ts",
+    "knex": "knex --knexfile ./knex/knexfile.ts",
     "migration": "bash scripts/run_migrations.sh"
   },
   "author": "",

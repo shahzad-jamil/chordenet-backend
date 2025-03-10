@@ -4,7 +4,7 @@ import cors from "cors";
 import { morganConfig } from "./config/morgan";
 import corsOptions from "./config/cors";
 import Routes from "./routes";
-
+import "./config/db"; 
 
 const app: Express = express();
 

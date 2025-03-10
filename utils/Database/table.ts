@@ -1,3 +1,5 @@
 export const TABLE = {
- USER:"users"
+ USER:"users",
+ PLAN:"plans",
+ TOKEN:"tokens"
 };
