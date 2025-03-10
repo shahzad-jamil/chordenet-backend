@@ -111,8 +111,9 @@ export const loginUser = asyncHandler(async (req: Request, res: Response) => {
             return sendReponse(res, 400, "Invalid email or password", false);
         }
 
-        const accessToken = getSignedJwt(user.id);
-        return sendReponse(res, 200, "Login successful", true, { user, accessToken });
+        const token = getSignedJwt(user.id);
+        return sendReponse(res, 200, "Login successful", true, { user, token });
+
     }
     catch (err) {
         return sendReponse(res, 500, "Internal Server Error", false, err);

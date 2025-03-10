@@ -14,9 +14,7 @@
 //   credentials: true,
 // };
 
-// export default corsOptions;
-// ⚠️ Allow all origins (Not recommended for production)
-
+// export default corsOptions
 // ].filter(origin => origin.trim() !== ""); // Remove empty strings
 
 // const corsOptions = {
